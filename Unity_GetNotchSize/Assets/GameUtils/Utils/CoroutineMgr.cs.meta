@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 19b6587492f15407688cab73e71ddcb0
+labels:
+- coroutine
+- manager
+- coroutines
+- thread
+- coroutinemanager
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
