@@ -201,7 +201,7 @@ namespace yoyohan.YouDaSdkTool
 #if UNITY_EDITOR
             OnGetNotchSize(100);
 #elif UNITY_ANDROID
-            SendMessageToAndroidByPackage("com.yoyohan.notchsize.MainActivity", "getNotchSize", false);
+            SendMessageToAndroidByPackage("com.yoyohan.getnotchsize.MainActivity", "getNotchSize", false);
 #elif UNITY_IOS
             OnGetNotchSize(getNotchSize_iOS());
 #else
