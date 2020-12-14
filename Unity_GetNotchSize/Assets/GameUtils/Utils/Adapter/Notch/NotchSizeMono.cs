@@ -14,6 +14,13 @@ namespace yoyohan
     /// </summary>
     public class NotchSizeMono : MonoBehaviour
     {
+        private Vector2 preAnchoredPos;
+
+        private void Awake()
+        {
+            preAnchoredPos = (transform as RectTransform).anchoredPosition;
+        }
+
         public void RefershNotchSize()
         {
             Rect canvasRect = transform.root.GetComponent<RectTransform>().rect;
@@ -30,11 +37,11 @@ namespace yoyohan
             {
                 if (rect.anchorMin == rect.anchorMax)
                 {
-                    rect.anchoredPosition += Vector2.right * uiNotchSize;
+                    rect.anchoredPosition = preAnchoredPos + Vector2.right * uiNotchSize;
                 }
                 else
                 {
-                    rect.anchoredPosition += Vector2.right * uiNotchSize;
+                    rect.anchoredPosition = preAnchoredPos + Vector2.right * uiNotchSize;
                     rect.offsetMax = new Vector2(0, rect.offsetMin.y);
                 }
             }
@@ -42,11 +49,11 @@ namespace yoyohan
             {
                 if (rect.anchorMin == rect.anchorMax)
                 {
-                    rect.anchoredPosition -= Vector2.up * uiNotchSize;
+                    rect.anchoredPosition = preAnchoredPos - Vector2.up * uiNotchSize;
                 }
                 else
                 {
-                    rect.anchoredPosition -= Vector2.up * uiNotchSize;
+                    rect.anchoredPosition = preAnchoredPos - Vector2.up * uiNotchSize;
                     rect.offsetMin = new Vector2(rect.offsetMin.x, 0);
                 }
             }

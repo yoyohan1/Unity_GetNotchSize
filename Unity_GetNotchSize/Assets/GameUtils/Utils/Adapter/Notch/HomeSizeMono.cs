@@ -17,10 +17,6 @@ namespace yoyohan
         private void Awake()
         {
             RectTransform rect = transform as RectTransform;
-            //Debug.Log(gameObject.name + "  sizeDelta:" + rect.sizeDelta);
-            //Debug.Log(gameObject.name + "  anchoredPosition:" + rect.anchoredPosition);
-            //Debug.Log(gameObject.name + "  offsetMin:" + rect.offsetMin);
-            //Debug.Log(gameObject.name + "  offsetMax:" + rect.offsetMax);
             if (rect.anchorMin == rect.anchorMax)
             {
                 rect.anchoredPosition += Vector2.up * homeSize;

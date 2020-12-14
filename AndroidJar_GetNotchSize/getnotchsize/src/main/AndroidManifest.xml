@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yoyohan.getnotchsize">
+
+    <application>
+        <!--针对Android8.0 华为手机显示全屏 去掉Unity刘海屏黑边 Android8.0以上可通过style或者代码设置全屏-->
+        <meta-data android:name="android.notch_support" android:value="true"/>
+        <!--针对Android8.0 小米手机显示全屏 去掉Unity刘海屏黑边 Android8.0以上可通过style或者代码设置全屏-->
+        <meta-data android:name="notch.config" android:value="portrait|landscape" />
+    </application>
+
+</manifest>
