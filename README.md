@@ -5,7 +5,9 @@
 
    + 没有`Render outside safe area`时：
    		- AndroidP以下使用代码判断四大机型获取刘海屏高度 
+
 		- AndroidP以上设置`shortEdges`然后使用`DisplayCutout`获取刘海屏高度 
+
    + 有`Render outside safe area`时：
    		- 必须勾选`Render outside safe area`，不然设置`shortEdges`没有作用，因为游戏场景的渲染刘海是由Unity来管理的
 		
@@ -48,7 +50,7 @@
 
 ### 效果图
 
-[!image](https://github.com/yoyohan1/Unity_GetNotchSize/blob/main/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
+![image](https://github.com/yoyohan1/Unity_GetNotchSize/blob/main/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
 
 
 
