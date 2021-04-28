@@ -2,20 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using yoyohan.YouDaSdkTool;
 
 public class Test : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private bool temp = true;
+
     void Start()
     {
-        Debug.Log(Screen.fullScreen);
-        Screen.fullScreen = true;
-        transform.GetComponent<Button>().onClick.AddListener(yoyohan.YouDaSdkTool.YouDaSdkMgr.instance.getNotchSize);
+        //Debug.Log(Screen.fullScreen);
+        //Screen.fullScreen = true;
+        transform.GetComponent<Button>().onClick.AddListener(onGetNotchSizeBtnClick);
     }
 
-    // Update is called once per frame
-    void Update()
+    void onGetNotchSizeBtnClick()
     {
-        
+        if (temp)
+        {
+            YouDaSdkMgr.instance.getNotchSize();
+        }
+        else
+        {
+            YouDaSdkMgr.instance.OnGetNotchSize(0, 0);
+        }
+        temp = !temp;
     }
 }

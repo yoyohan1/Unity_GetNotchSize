@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "iOSUtil.h"
 #import <sys/utsname.h>
+#import <AVFoundation/AVFoundation.h>
  
 @implementation iOSUtil
  
@@ -305,21 +306,33 @@ extern "C" {
         return value;
     }
     
-    char* getiPhoneType() {
-        NSLog(@"iOS端开始getiPhoneType");
+    char* getiPhoneType_iOS() {
+        NSLog(@"iOS端开始getiPhoneType_iOS");
         NSString *str=[iOSUtil getiPhoneType];
         NSLog(@"getiPhoneType结果为：%@",str);
         return MakeStringCopy([str UTF8String]);
     }
 
-    long getDiskFreeSize(){
+    long getDiskFreeSize_iOS(){
+    	NSLog(@"iOS端开始getDiskFreeSize_iOS");
         return (long)[iOSUtil getDiskFreeSize];
     }
 
-    void openUrl(const char *url){
-        NSLog(@"使用原生openUrl:%@",[NSString stringWithUTF8String:url]);
+    void openUrl_iOS(const char *url){
+        NSLog(@"iOS端开始原生openUrl:%@",[NSString stringWithUTF8String:url]);
         [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
     }
 
+	void openMuteAudio_iOS(){
+		NSLog(@"iOS端开始openMuteAudio_iOS");
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+    }
+
+    void closeMuteAudio_iOS(){
+    	NSLog(@"iOS端开始closeMuteAudio_iOS");
+        //如果有注册remote得把remote也注销 在应用杀死的情况下停掉播放…
+        [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    }
 }
 

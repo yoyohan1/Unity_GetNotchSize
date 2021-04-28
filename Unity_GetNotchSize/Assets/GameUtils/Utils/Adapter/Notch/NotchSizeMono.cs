@@ -14,63 +14,144 @@ namespace yoyohan
     /// </summary>
     public class NotchSizeMono : MonoBehaviour
     {
-        private Vector2 preAnchoredPos;
+        public bool isLandscape;
+        public AnchorType anchorType;
 
-        private void Awake()
+        private Rect canvasRect;
+        private RectTransform rect;
+        private Vector2 preAnchoredPos;
+        private Vector2 preOffsetMax;
+        private Vector2 preOffsetMin;
+        private bool isInit = false;
+
+
+
+        private float uiNotchSize
         {
-            preAnchoredPos = (transform as RectTransform).anchoredPosition;
+            get
+            {
+                float notchRadio = YouDaSdkMgr.instance.notchSize / (isLandscape ? Screen.width : Screen.height);
+                return (isLandscape ? canvasRect.width : canvasRect.height) * notchRadio;
+            }
+        }
+
+        private float uiHomeSize
+        {
+            get
+            {
+                float homeRadio = YouDaSdkMgr.instance.homeSize / (isLandscape ? Screen.width : Screen.height);
+                return (isLandscape ? canvasRect.width : canvasRect.height) * homeRadio;
+            }
+        }
+
+
+        private void Init()
+        {
+            canvasRect = transform.root.GetComponent<RectTransform>().rect;
+            rect = transform as RectTransform;
+            preAnchoredPos = rect.anchoredPosition;
+            preOffsetMax = rect.offsetMax;
+            preOffsetMin = rect.offsetMin;
+            isInit = true;
         }
 
         public void RefershNotchSize()
         {
-            Rect canvasRect = transform.root.GetComponent<RectTransform>().rect;
-            bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight ? true : false;
-#if UNITY_EDITOR
-            isLandscape = canvasRect.width > canvasRect.height ? true : false;
-#endif
-            float notchRadio = YouDaSdkMgr.instance.notchSize / (isLandscape ? Screen.width : Screen.height);
-            float uiNotchSize = (isLandscape ? canvasRect.width : canvasRect.height) * notchRadio;
-
-            RectTransform rect = transform as RectTransform;
-
-            if (isLandscape)
+            if (isInit == false)
             {
-                if (rect.anchorMin == rect.anchorMax)
-                {
-                    rect.anchoredPosition = preAnchoredPos + Vector2.right * uiNotchSize;
-                }
-                else
-                {
-                    rect.anchoredPosition = preAnchoredPos + Vector2.right * uiNotchSize;
-                    rect.offsetMax = new Vector2(0, rect.offsetMin.y);
-                }
+                Init();
             }
-            else
+
+            Debug.Log("RefershNotchSize! uiNotchSize:" + uiNotchSize + " uiHomeSize:" + uiHomeSize, gameObject);
+            switch (anchorType)
             {
-                if (rect.anchorMin == rect.anchorMax)
-                {
-                    rect.anchoredPosition = preAnchoredPos - Vector2.up * uiNotchSize;
-                }
-                else
-                {
-                    rect.anchoredPosition = preAnchoredPos - Vector2.up * uiNotchSize;
-                    rect.offsetMin = new Vector2(rect.offsetMin.x, 0);
-                }
+                case AnchorType.Notch:
+                    if (isLandscape)
+                    {
+                        rect.anchoredPosition = preAnchoredPos + Vector2.right * uiNotchSize;
+                    }
+                    else
+                    {
+                        rect.anchoredPosition = preAnchoredPos - Vector2.up * uiNotchSize;
+                    }
+                    break;
+                case AnchorType.Home:
+                    if (isLandscape)
+                    {
+                        rect.anchoredPosition = preAnchoredPos - Vector2.right * uiHomeSize;
+                    }
+                    else
+                    {
+                        rect.anchoredPosition = preAnchoredPos + Vector2.up * uiHomeSize;
+                    }
+                    break;
+                case AnchorType.NotchAndHome:
+                    if (isLandscape)
+                    {
+                        rect.offsetMin = new Vector2(preOffsetMin.x + uiNotchSize, preOffsetMin.y);
+
+                        //横屏iphone无需适配导航栏的高度
+                        if (Application.platform != RuntimePlatform.IPhonePlayer)
+                        {
+                            rect.offsetMax = new Vector2(preOffsetMax.x - uiHomeSize, preOffsetMax.y);
+                        }
+                    }
+                    else
+                    {
+                        rect.offsetMin = new Vector2(preOffsetMin.x, preOffsetMin.y + uiHomeSize);
+                        rect.offsetMax = new Vector2(preOffsetMax.x, preOffsetMax.y - uiNotchSize);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
 
+        IEnumerator IERefershNotchSize()
+        {
+            yield return null;
+            RefershNotchSize();
+        }
+
         private void OnEnable()
         {
-            RefershNotchSize();
+            StartCoroutine(IERefershNotchSize());
             YouDaSdkMgr.instance.OnNotchSizeChangedAction += RefershNotchSize;
         }
 
         private void OnDisable()
         {
-            RefershNotchSize();
             YouDaSdkMgr.instance.OnNotchSizeChangedAction -= RefershNotchSize;
         }
 
+
+
+
+        public enum AnchorType
+        {
+            Notch,//锚点竖屏靠上或横屏靠左，仅使用刘海高度
+            Home,//锚点竖屏靠下或横屏靠右，仅使用导航栏或苹果Home键高度
+            NotchAndHome,//锚点竖屏上下拉伸或横屏左右拉伸，使用刘海高度+导航栏或苹果Home键高度
+        }
     }
 }
+
+
+
+
+/*
+private bool isLandscape
+{
+    get
+    {
+        bool isLandscape = Input.deviceOrientation == DeviceOrientation.LandscapeLeft || Input.deviceOrientation == DeviceOrientation.LandscapeRight ? true : false;
+#if UNITY_EDITOR
+        isLandscape = canvasRect.width > canvasRect.height ? true : false;
+#endif
+        return isLandscape;
+    }
+}
+*/
+
+

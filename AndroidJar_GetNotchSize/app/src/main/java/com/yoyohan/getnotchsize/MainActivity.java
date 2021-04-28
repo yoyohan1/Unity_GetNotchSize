@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private int notchSize;
 
@@ -93,7 +93,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void setAndSendNotchSize(int size) {
         notchSize = size;
+
         MyLog("Unity", "设置notchSize：" + notchSize + "!");
+        MyLog("Unity", "isNavigationBarShow：" + isNavigationBarShow(getCurActivity()) + "!");
+        MyLog("Unity", "NavigatorHeight：" + getBottomNavigatorHeight(getCurActivity()) + "!");
+        MyLog("Unity", "设置homeSize：" + (isNavigationBarShow(getCurActivity()) ? getBottomNavigatorHeight(getCurActivity()) : 0) + "!");
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -356,6 +360,7 @@ public class MainActivity extends AppCompatActivity {
             Point realSize = new Point();
             display.getSize(size);
             display.getRealSize(realSize);
+            Log.i("Unity", realSize + " " + size);
             return realSize.y != size.y;
         } else {
             boolean menu = ViewConfiguration.get(act).hasPermanentMenuKey();
