@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using yoyohan.YouDaSdkTool;
 
-namespace yoyohan
+namespace yoyohan.getnotchsize
 {
     /// <summary>
     /// 描述：
@@ -30,7 +30,7 @@ namespace yoyohan
         {
             get
             {
-                float notchRadio = YouDaSdkMgr.instance.notchSize / (isLandscape ? Screen.width : Screen.height);
+                float notchRadio = GetNotchSizeMgr.instance.notchSize / (isLandscape ? Screen.width : Screen.height);
                 return (isLandscape ? canvasRect.width : canvasRect.height) * notchRadio;
             }
         }
@@ -39,7 +39,7 @@ namespace yoyohan
         {
             get
             {
-                float homeRadio = YouDaSdkMgr.instance.homeSize / (isLandscape ? Screen.width : Screen.height);
+                float homeRadio = GetNotchSizeMgr.instance.homeSize / (isLandscape ? Screen.width : Screen.height);
                 return (isLandscape ? canvasRect.width : canvasRect.height) * homeRadio;
             }
         }
@@ -117,12 +117,12 @@ namespace yoyohan
         private void OnEnable()
         {
             StartCoroutine(IERefershNotchSize());
-            YouDaSdkMgr.instance.OnNotchSizeChangedAction += RefershNotchSize;
+            GetNotchSizeMgr.instance.OnNotchSizeChangedAction += RefershNotchSize;
         }
 
         private void OnDisable()
         {
-            YouDaSdkMgr.instance.OnNotchSizeChangedAction -= RefershNotchSize;
+            GetNotchSizeMgr.instance.OnNotchSizeChangedAction -= RefershNotchSize;
         }
 
 

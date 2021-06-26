@@ -31,11 +31,6 @@ namespace yoyohan.YouDaSdkTool
 
             ResponceMessage responceMessage = new ResponceMessage(JsonMapper.ToObject(returnStr));
 
-            if (responceMessage.requestId == "GETNOTCHSIZE")
-            {
-                YouDaSdkMgr.instance.OnGetNotchSize(responceMessage.msg.GetValue<int>("notchSize"), 0);
-            }
-
             if (YouDaSdkMgr.instance.OnGetSDKResponce != null)
             {
                 YouDaSdkMgr.instance.OnGetSDKResponce(responceMessage);

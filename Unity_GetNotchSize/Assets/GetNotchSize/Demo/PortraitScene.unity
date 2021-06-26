@@ -785,6 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e59b4528e21934f94e212670507660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLandscape: 0
   anchorType: 0
 --- !u!1 &1903964195
 GameObject:
@@ -916,6 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e59b4528e21934f94e212670507660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLandscape: 0
   anchorType: 1
 --- !u!114 &1949484825
 MonoBehaviour:
@@ -1056,63 +1058,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &2128136264
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 180448, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_Name
-      value: YouDaSdk
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 478664, guid: d97510266d9e48341983c34641a401b2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d97510266d9e48341983c34641a401b2, type: 3}
 --- !u!1 &2146271316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e59b4528e21934f94e212670507660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLandscape: 0
   anchorType: 2
 --- !u!114 &2146271319
 MonoBehaviour:

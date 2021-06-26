@@ -113,45 +113,6 @@ namespace yoyohan.YouDaSdkTool
         #endregion
 
 
-        #region 刘海屏的代码
-        //GitHub地址： https://github.com/yoyohan1/UnityJar_GetNotchSize
-#if UNITY_IOS
-        [System.Runtime.InteropServices.DllImport("__Internal")]
-        public static extern bool getIsNotch_iOS();
-        [System.Runtime.InteropServices.DllImport("__Internal")]
-        public static extern float getNotchSize_iOS();
-#endif
-
-        public void getNotchSize()
-        {
-#if UNITY_EDITOR
-            OnGetNotchSize(100, 10);
-#elif UNITY_ANDROID
-            SendMessageToAndroidByPackage("com.yoyohan.getnotchsize.MainActivity", "getNotchSize", false);
-#elif UNITY_IOS
-            OnGetNotchSize(getNotchSize_iOS(),getNotchSize_iOS());
-#else
-            OnGetNotchSize(0, 0);
-#endif
-        }
-
-        public float notchSize;
-        public float homeSize;
-        public Action OnNotchSizeChangedAction;
-
-        //获取NotchSize成功
-        public void OnGetNotchSize(float nSize, float hSize)
-        {
-            notchSize = nSize;
-            homeSize = hSize;
-            if (OnNotchSizeChangedAction != null)
-            {
-                Debug.Log("OnNotchSizeChangedAction触发！notchSize：" + notchSize + " homeSize：" + homeSize);
-                OnNotchSizeChangedAction();
-            }
-        }
-
-        #endregion
 
 
 
